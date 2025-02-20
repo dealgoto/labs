@@ -1,0 +1,82 @@
+<ScreenOne>:
+    name: "screen1"
+    ScrollView:
+        pos_hint: {'bottom': 1}
+        do_scroll_y: True
+        GridLayout:
+            name: "screen1"
+            cols: 1
+            padding: 0
+            spacing: 0
+            size_hint_y: None
+            height: self.minimum_height
+
+            Button:
+                text: "1: Відтворити відео"
+                background_color: (0.502, 0, 0.502, 1) if self.state == 'normal' else (0.502, 0, 0.502, .75)
+                on_release: root.onNextScreen(self, 'cat')
+
+            Button:
+                text: "2: Відтворити аудіо"
+                background_color: (0, 0, 1, 1) if self.state == 'normal' else (0, 0, 1, .75)
+                on_release: root.onNextScreen(self, 'audio')
+
+<ScreenVideo>:
+    GridLayout:
+        name: "VideoScreenGrid"
+        pos_hint: {'top': 1}
+        cols: 1
+        rows: 2
+
+        ActionBar:
+            pos_hint: {'top': 3}
+            height: '100sp'
+            ActionView:
+                ActionPrevious:
+                    with_previous: True
+                    on_release: root.onBackBtn()
+
+<ScreenAudio>:
+    GridLayout:
+        name: "AudioScreenGrid"
+        pos_hint: {'top': 1}
+        cols: 1
+        rows: 2
+
+        ActionBar:
+            pos_hint: {'top': 3}
+            height: '100sp'
+            ActionView:
+                ActionPrevious:
+                    with_previous: True
+                    on_release: root.onBackBtn()
+
+<Manager>:
+    id: screen_manager
+
+    screen_one: screen_one
+    screen_video: screen_video
+    screen_audio: screen_audio
+
+    ScreenOne:
+        id: screen_one
+        name: 'screen1'
+        manager: screen_manager
+
+    ScreenVideo:
+        id: screen_video
+        name: 'screen_video'
+        manager: screen_manager
+
+    ScreenAudio:
+        id: screen_audio
+        name: 'screen_audio'
+        manager: screen_manager
+
+<VideoPlayer>:
+    options: {'eos': 'loop'}
+    allow_stretch: True
+
+<Button>:
+    height: '75sp'
+    size_hint_y: None
