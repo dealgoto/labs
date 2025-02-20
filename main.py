@@ -80,4 +80,4 @@ class ScreensApp(App):
         return Manager()
 
 if __name__ == "__main__":
-    ScreensApp().run()
+    ScreensApp().run()"# Це зм?ни у feature-1" 
